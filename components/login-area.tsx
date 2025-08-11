@@ -1,0 +1,210 @@
+"use client"
+
+import { useState } from "react"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
+import Navigation from "@/components/navigation"
+import Footer from "@/components/footer"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Terminal } from "lucide-react"
+import Image from "next/image"
+
+const mockUsers = [
+  {
+    email: "expositor@email.com",
+    password: "123456",
+    tipoParticipacion: "expositor",
+    nombre: "Expositor Ejemplo"
+  },
+  {
+    email: "comprador@email.com",
+    password: "123456",
+    tipoParticipacion: "comprador",
+    nombre: "Comprador Ejemplo"
+  },
+  // Agrega más usuarios de ejemplo según los tipos
+]
+
+export default function LoginArea() {
+  const [form, setForm] = useState({ email: "", password: "" })
+  const [error, setError] = useState("")
+  const [user, setUser] = useState<any>(null)
+
+  // Hooks para recuperación de contraseña
+  const [showRecovery, setShowRecovery] = useState(false)
+  const [recoveryEmail, setRecoveryEmail] = useState("")
+  const [recoverySent, setRecoverySent] = useState(false)
+  const [recoveryError, setRecoveryError] = useState("")
+
+  const handleRecovery = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setRecoveryError("")
+    if (!recoveryEmail || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(recoveryEmail)) {
+      setRecoveryError("Por favor ingresa un email válido.")
+      return
+    }
+    // Simular envío de email
+    setTimeout(() => {
+      setRecoverySent(true)
+    }, 1000)
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.id]: e.target.value })
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setError("")
+    const found = mockUsers.find(
+      (u) => u.email === form.email && u.password === form.password
+    )
+    if (found) {
+      setUser(found)
+    } else {
+      setError("Credenciales incorrectas")
+    }
+  }
+
+  if (user) {
+    let tipoMsg = "";
+    switch (user.tipoParticipacion) {
+      case "expositor":
+        tipoMsg = "¡Acceso a tu área de expositor!";
+        break;
+      case "comprador":
+        tipoMsg = "¡Bienvenido comprador!";
+        break;
+      case "vendedor":
+        tipoMsg = "¡Bienvenido vendedor!";
+        break;
+      case "productor":
+        tipoMsg = "¡Bienvenido productor!";
+        break;
+      default:
+        tipoMsg = `¡Bienvenido ${user.tipoParticipacion}!`;
+    }
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full flex flex-col items-center text-center border border-green-500">
+          <Terminal className="h-8 w-8 text-green-600 mb-2" />
+          <h2 className="text-2xl font-bold mb-2 text-green-700">Hola, {user.nombre}</h2>
+          <p className="mb-2 text-gray-700">Has iniciado sesión como <span className="font-semibold">{user.tipoParticipacion}</span>.</p>
+          <p className="mb-6 text-green-700 font-semibold">{tipoMsg}</p>
+          <Button className="bg-green-600 hover:bg-green-700 w-32" onClick={() => setUser(null)}>
+            Cerrar sesión
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <>
+      <Navigation />
+      <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-white py-12 px-2">
+        <div className="bg-white rounded-xl shadow-2xl flex flex-col md:flex-row items-center w-full max-w-3xl overflow-hidden border border-orange-100">
+          {/* Imagen decorativa al lado */}
+          <div className="hidden md:block w-1/2 h-full relative min-h-[400px]">
+            <Image
+              src="/HotelSerrano.jpg"
+              alt="Hotel El Serrano"
+              fill
+              className="object-cover w-full h-full"
+              style={{ borderTopLeftRadius: '0.75rem', borderBottomLeftRadius: '0.75rem' }}
+              priority
+              quality={100}
+              sizes="(min-width: 768px) 50vw, 100vw"
+            />
+            {/* Sin overlay para que la imagen se vea completamente */}
+          </div>
+          {/* Logo y formulario */}
+          <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8">
+            <Image
+              src="/MDN.png"
+              alt="Logo"
+              width={80}
+              height={80}
+              className="mb-4"
+              priority
+            />
+            <h1 className="text-3xl font-extrabold text-orange-700 mb-2 text-center">
+              Rueda <span className="text-gray-900">de</span> Negocios
+            </h1>
+            <h2 className="text-xl font-bold text-center mb-8 text-gray-700">Iniciar Sesión</h2>
+            <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-sm">
+              <div>
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" type="email" value={form.email} onChange={handleChange} required />
+              </div>
+              <div>
+                <Label htmlFor="password">Contraseña</Label>
+                <Input id="password" type="password" value={form.password} onChange={handleChange} required />
+              </div>
+              <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
+                Ingresar
+              </Button>
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-2 mt-4">
+                <a href="/registro" className="text-orange-700 hover:underline font-medium text-sm">Registrarse</a>
+                <button
+                  type="button"
+                  className="text-gray-500 hover:text-orange-700 hover:underline font-medium text-sm"
+                  onClick={() => {
+                    setShowRecovery(true)
+                    setRecoverySent(false)
+                    setRecoveryEmail("")
+                    setRecoveryError("")
+                  }}
+                >
+                  ¿Olvidaste tu contraseña?
+                </button>
+        {/* Modal de recuperación de contraseña */}
+        <Dialog open={showRecovery} onOpenChange={setShowRecovery}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Recuperar contraseña</DialogTitle>
+            </DialogHeader>
+            {recoverySent ? (
+              <div className="text-green-700 text-center py-4">
+                Se ha enviado un enlace de recuperación a <span className="font-semibold">{recoveryEmail}</span>.
+              </div>
+            ) : (
+              <form onSubmit={handleRecovery} className="space-y-4">
+                <div>
+                  <Label htmlFor="recoveryEmail">Email</Label>
+                  <Input
+                    id="recoveryEmail"
+                    type="email"
+                    value={recoveryEmail}
+                    onChange={e => setRecoveryEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                {recoveryError && (
+                  <div className="text-red-600 text-sm">{recoveryError}</div>
+                )}
+                <DialogFooter>
+                  <Button type="submit" className="bg-green-600 hover:bg-green-700 w-full">Enviar enlace</Button>
+                  <Button type="button" variant="outline" className="w-full" onClick={() => setShowRecovery(false)}>Cancelar</Button>
+                </DialogFooter>
+              </form>
+            )}
+          </DialogContent>
+        </Dialog>
+              </div>
+              {error && (
+                <Alert className="border-red-500 text-red-700 bg-red-50 mt-4">
+                  <AlertTitle>Error</AlertTitle>
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
+            </form>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </>
+  )
+}

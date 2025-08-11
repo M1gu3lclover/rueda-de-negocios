@@ -32,18 +32,18 @@ export default function Navigation() {
 		<header className="bg-white shadow sticky top-0 z-40">
 			<div className="container mx-auto px-4 flex items-center justify-between h-16">
 				{/* Logo basado en texto - evitar imagen remota */}
-        <Link href="/" className="flex items-center space-x-2">
-          <Image
-            src="/MDN.png" // imagen del logo ...
-            alt="Logo"
-            width={40}
-            height={40}
-            priority
-          />
-          <span className="text-xl font-extrabold text-orange-700 whitespace-nowrap">
-            Rueda&nbsp;<span className="text-gray-900">de</span>&nbsp;Negocios
-          </span>
-        </Link>
+		<Link href="/" className="flex items-center space-x-2">
+		  <Image
+			src="/MDN.png" // imagen del logo ...
+			alt="Logo"
+			width={40}
+			height={40}
+			priority
+		  />
+		  <span className="text-xl font-extrabold text-orange-700 whitespace-nowrap">
+			Rueda&nbsp;<span className="text-gray-900">de</span>&nbsp;Negocios
+		  </span>
+		</Link>
 
 				{/* Menú principal (desktop) */}
 				<nav className="hidden md:flex items-center space-x-6 font-medium text-gray-700">
@@ -99,9 +99,12 @@ export default function Navigation() {
 							))}
 						</DropdownMenuContent>
 					</DropdownMenu>
-					<Link href="/registro" className="hover:text-orange-600">
-						Registro
-					</Link>
+		  <Link href="/registro" className="hover:text-orange-600">
+			Registro
+		  </Link>
+		  <Link href="/login" className="hover:text-orange-600">
+			Login
+		  </Link>
 				</nav>
 
 				{/* Ícono hamburguesa para mobile (sin funcionalidad aún) */}
