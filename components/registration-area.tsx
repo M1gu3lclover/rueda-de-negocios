@@ -12,9 +12,20 @@ import { Progress } from "@/components/ui/progress"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Terminal } from "lucide-react"
 
+type FormData = {
+  nombre: string
+  apellido: string
+  email: string
+  tipoParticipacion: string
+  empresa: string
+  pais: string
+  intereses: string[]
+  comentarios: string
+}
+
 export default function RegistrationArea() {
   const [step, setStep] = useState(1)
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     nombre: "",
     apellido: "",
     email: "",
@@ -24,10 +35,11 @@ export default function RegistrationArea() {
     intereses: [],
     comentarios: "",
   })
-  const [errors, setErrors] = useState({})
-  const [submissionStatus, setSubmissionStatus] = useState(null) // 'success' or 'error'
+  type Errors = Partial<Record<keyof FormData, string>>
+  const [errors, setErrors] = useState<Errors>({})
+  const [submissionStatus, setSubmissionStatus] = useState<"success" | "error" | null>(null) // 'success' or 'error'
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value, type, checked } = e.target
     if (type === "checkbox") {
       setFormData((prev) => {
@@ -39,12 +51,26 @@ export default function RegistrationArea() {
     }
   }
 
-  const handleSelectChange = (id, value) => {
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { id, value } = e.target
+    setFormData((prev) => ({ ...prev, [id]: value }))
+  }
+
+  const handleInterestChange = (interest: string, checked: boolean) => {
+    setFormData((prev) => {
+      const newInterests = checked
+        ? [...prev.intereses, interest]
+        : prev.intereses.filter((item) => item !== interest)
+      return { ...prev, intereses: newInterests }
+    })
+  }
+
+  const handleSelectChange = (id: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [id]: value }))
   }
 
   const validateStep = () => {
-    const newErrors = {}
+    const newErrors: Errors = {}
     if (step === 1) {
       if (!formData.nombre) newErrors.nombre = "El nombre es requerido."
       if (!formData.apellido) newErrors.apellido = "El apellido es requerido."
@@ -69,7 +95,7 @@ export default function RegistrationArea() {
     setStep((prev) => prev - 1)
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (validateStep()) {
       // Simulate API call
@@ -137,7 +163,7 @@ export default function RegistrationArea() {
                 id="tipoParticipacion"
                 value={formData.tipoParticipacion}
                 onValueChange={(value) => handleSelectChange("tipoParticipacion", value)}
-                className="w-full grid grid-cols-2 gap-2"
+                className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2"
               >
                 <div className="flex items-center space-x-2 w-full">
                   <RadioGroupItem value="expositor" id="expositor" />
@@ -148,16 +174,16 @@ export default function RegistrationArea() {
                   <Label htmlFor="comprador">Comprador</Label>
                 </div>
                 <div className="flex items-center space-x-2 w-full">
-                  <RadioGroupItem value="venededor" id="vendedor" />
-                  <Label htmlFor="comprador">Vendedor</Label>
+                  <RadioGroupItem value="vendedor" id="vendedor" />
+                  <Label htmlFor="vendedor">Vendedor</Label>
                 </div>
                 <div className="flex items-center space-x-2 w-full">
                   <RadioGroupItem value="exportador" id="exportador" />
-                  <Label htmlFor="comprador">Exportador</Label>
+                  <Label htmlFor="exportador">Exportador</Label>
                 </div>
                 <div className="flex items-center space-x-2 w-full">
-                  <RadioGroupItem value="productor" id="prductor" />
-                  <Label htmlFor="visitante">Productor</Label>
+                  <RadioGroupItem value="productor" id="productor" />
+                  <Label htmlFor="productor">Productor</Label>
                 </div>
                 <div className="flex items-center space-x-2 w-full">
                   <RadioGroupItem value="visitante" id="visitante" />
@@ -165,27 +191,27 @@ export default function RegistrationArea() {
                 </div>
                 <div className="flex items-center space-x-2 w-full">
                   <RadioGroupItem value="laboratorio" id="laboratorio" />
-                  <Label htmlFor="visitante">Laboratorio</Label>
+                  <Label htmlFor="laboratorio">Laboratorio</Label>
                 </div>
                 <div className="flex items-center space-x-2 w-full">
                   <RadioGroupItem value="intermediario" id="intermediario" />
-                  <Label htmlFor="visitante">Intermediario</Label>
+                  <Label htmlFor="intermediario">Intermediario</Label>
                 </div>
                 <div className="flex items-center space-x-2 w-full">
                   <RadioGroupItem value="centrald" id="centrald" />
-                  <Label htmlFor="visitante">Central de Beneficio</Label>
+                  <Label htmlFor="centrald">Central de Beneficio</Label>
                 </div>
                 <div className="flex items-center space-x-2 w-full">
                   <RadioGroupItem value="asociacionp" id="asociacionp" />
-                  <Label htmlFor="visitante">Asociación de Productores</Label>
+                  <Label htmlFor="asociacionp">Asociación de Productores</Label>
                 </div>
                 <div className="flex items-center space-x-2 w-full">
                   <RadioGroupItem value="agroinsumos" id="agroinsumos" />
-                  <Label htmlFor="visitante">Agroinsumos</Label>
+                  <Label htmlFor="agroinsumos">Agroinsumos</Label>
                 </div>
                 <div className="flex items-center space-x-2 w-full">
                   <RadioGroupItem value="maquinaria" id="maquinaria" />
-                  <Label htmlFor="visitante">Maquinaria</Label>
+                  <Label htmlFor="maquinaria">Maquinaria</Label>
                 </div>
               </RadioGroup>
               {errors.tipoParticipacion && <p className="text-red-500 text-sm mt-1">{errors.tipoParticipacion}</p>}
@@ -232,42 +258,40 @@ export default function RegistrationArea() {
           <div className="space-y-4">
             <h2 className="text-2xl font-semibold mb-4">Paso 3: Intereses y Comentarios</h2>
             <div>
-              <Label>Áreas de Interés</Label>
-              <div className="grid grid-cols-2 gap-2 mt-2">
+              <Label>Intereses</Label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="produccion"
                     value="produccion"
-                    checked={formData.intereses.includes("producción")}
+                    checked={formData.intereses.includes("produccion")}
                     onCheckedChange={(checked) =>
-                      handleChange({ target: { id: "intereses", value: "produccion", type: "checkbox", checked } })
+                      handleInterestChange("produccion", !!checked)
                     }
                   />
-                  <Label htmlFor="produccion">Producción de Cacao</Label>
+                  <Label htmlFor="produccion">Producción</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="procesamiento"
                     value="procesamiento"
-                    checked={formData.intereses.includes("proccesamiento")}
+                    checked={formData.intereses.includes("procesamiento")}
                     onCheckedChange={(checked) =>
-                      handleChange({ target: { id: "intereses", value: "procesamiento", type: "checkbox", checked } })
+                      handleInterestChange("procesamiento", !!checked)
                     }
                   />
-                  <Label htmlFor="procesamiento">Procesamiento de Cacao</Label>
+                  <Label htmlFor="procesamiento">Procesamiento</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="comercializacion"
                     value="comercializacion"
-                    checked={formData.intereses.includes("comercialización")}
+                    checked={formData.intereses.includes("comercializacion")}
                     onCheckedChange={(checked) =>
-                      handleChange({
-                        target: { id: "intereses", value: "comercializacion", type: "checkbox", checked },
-                      })
+                      handleInterestChange("comercializacion", !!checked)
                     }
                   />
-                  <Label htmlFor="comercializacion">Comercialización y Exportación</Label>
+                  <Label htmlFor="comercializacion">Comercialización</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox
@@ -275,21 +299,21 @@ export default function RegistrationArea() {
                     value="chocolateria"
                     checked={formData.intereses.includes("chocolateria")}
                     onCheckedChange={(checked) =>
-                      handleChange({ target: { id: "intereses", value: "chocolateria", type: "checkbox", checked } })
+                      handleInterestChange("chocolateria", !!checked)
                     }
                   />
-                  <Label htmlFor="chocolateria">Chocolatería Fina</Label>
+                  <Label htmlFor="chocolateria">Chocolatería</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="inversion"
                     value="inversion"
-                    checked={formData.intereses.includes("inversión")}
+                    checked={formData.intereses.includes("inversion")}
                     onCheckedChange={(checked) =>
-                      handleChange({ target: { id: "intereses", value: "inversion", type: "checkbox", checked } })
+                      handleInterestChange("inversion", !!checked)
                     }
                   />
-                  <Label htmlFor="inversion">Inversión y Financiamiento</Label>
+                  <Label htmlFor="inversion">Inversión</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox
@@ -297,7 +321,7 @@ export default function RegistrationArea() {
                     value="sostenibilidad"
                     checked={formData.intereses.includes("sostenibilidad")}
                     onCheckedChange={(checked) =>
-                      handleChange({ target: { id: "intereses", value: "sostenibilidad", type: "checkbox", checked } })
+                      handleInterestChange("sostenibilidad", !!checked)
                     }
                   />
                   <Label htmlFor="sostenibilidad">Sostenibilidad y Certificaciones</Label>
@@ -309,7 +333,7 @@ export default function RegistrationArea() {
               <Textarea
                 id="comentarios"
                 value={formData.comentarios}
-                onChange={handleChange}
+                onChange={handleTextareaChange}
                 rows={4}
                 placeholder="Escribe cualquier comentario o pregunta adicional aquí..."
               />
@@ -327,14 +351,16 @@ export default function RegistrationArea() {
       </form>
 
       {submissionStatus === "success" && (
-        <Alert className="mt-8 border-green-500 text-green-700 bg-green-50">
-          <Terminal className="h-4 w-4" />
-          <AlertTitle>¡Registro Exitoso!</AlertTitle>
-          <AlertDescription>
-            Gracias por registrarte en la Rueda de Negocios de Cacaos de Venezuela. Te hemos enviado un email de
-            confirmación.
-          </AlertDescription>
-        </Alert>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full flex flex-col items-center text-center border border-green-500">
+            <Terminal className="h-8 w-8 text-green-600 mb-2" />
+            <h2 className="text-2xl font-bold mb-2 text-green-700">¡Registro Exitoso!</h2>
+            <p className="mb-6 text-gray-700">Gracias por registrarte en la Rueda de Negocios de Cacaos de Venezuela. Te hemos enviado un email de confirmación.</p>
+            <Button className="bg-green-600 hover:bg-green-700 w-32" onClick={() => setSubmissionStatus(null)}>
+              Aceptar
+            </Button>
+          </div>
+        </div>
       )}
 
       {submissionStatus === "error" && (
