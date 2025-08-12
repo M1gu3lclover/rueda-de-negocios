@@ -99,10 +99,17 @@ export default function Navigation() {
 							))}
 						</DropdownMenuContent>
 					</DropdownMenu>
-		  <Link href="/registro" className="hover:text-orange-600">
+		  <Link
+			href="/registro"
+			className="bg-orange-600 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-orange-700 transition-colors border-2 border-orange-600 mr-2"
+			style={{ boxShadow: '0 2px 8px 0 rgba(255, 140, 0, 0.10)' }}
+		  >
 			Registro
 		  </Link>
-		  <Link href="/login" className="hover:text-orange-600">
+		  <Link
+			href="/login"
+			className="px-4 py-2 rounded-lg font-semibold border-2 border-orange-600 text-orange-700 bg-white hover:bg-orange-50 transition-colors"
+		  >
 			Login
 		  </Link>
 				</nav>

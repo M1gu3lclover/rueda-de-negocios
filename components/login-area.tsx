@@ -162,35 +162,45 @@ export default function LoginArea() {
                 </button>
         {/* Modal de recuperación de contraseña */}
         <Dialog open={showRecovery} onOpenChange={setShowRecovery}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Recuperar contraseña</DialogTitle>
-            </DialogHeader>
-            {recoverySent ? (
-              <div className="text-green-700 text-center py-4">
-                Se ha enviado un enlace de recuperación a <span className="font-semibold">{recoveryEmail}</span>.
-              </div>
-            ) : (
-              <form onSubmit={handleRecovery} className="space-y-4">
-                <div>
-                  <Label htmlFor="recoveryEmail">Email</Label>
-                  <Input
-                    id="recoveryEmail"
-                    type="email"
-                    value={recoveryEmail}
-                    onChange={e => setRecoveryEmail(e.target.value)}
-                    required
-                  />
+          <DialogContent className="max-w-md p-0 rounded-xl overflow-hidden">
+            <div className="flex flex-col items-center justify-center py-8 px-6">
+              <Image src="/MDN.png" alt="Logo" width={60} height={60} className="mb-2" priority />
+              <DialogHeader className="w-full text-center mb-2">
+                <DialogTitle className="text-2xl font-bold text-orange-700">Recuperar contraseña</DialogTitle>
+              </DialogHeader>
+              {recoverySent ? (
+                <div className="text-green-700 text-center py-4">
+                  <div className="flex flex-col items-center mb-2">
+                    <svg className="w-10 h-10 text-green-600 mb-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                  </div>
+                  <div className="text-lg font-semibold mb-1">¡Enlace enviado!</div>
+                  <div className="text-gray-700 text-sm">Hemos enviado un enlace de recuperación a <span className="font-semibold">{recoveryEmail}</span>.<br />Revisa tu bandeja de entrada y sigue las instrucciones.</div>
+                  <Button className="mt-6 bg-green-600 hover:bg-green-700 w-full" onClick={() => setShowRecovery(false)}>Cerrar</Button>
                 </div>
-                {recoveryError && (
-                  <div className="text-red-600 text-sm">{recoveryError}</div>
-                )}
-                <DialogFooter>
-                  <Button type="submit" className="bg-green-600 hover:bg-green-700 w-full">Enviar enlace</Button>
-                  <Button type="button" variant="outline" className="w-full" onClick={() => setShowRecovery(false)}>Cancelar</Button>
-                </DialogFooter>
-              </form>
-            )}
+              ) : (
+                <form onSubmit={handleRecovery} className="space-y-4 w-full">
+                  <div className="mb-2">
+                    <p className="text-gray-700 text-sm mb-2 text-center">Ingresa tu correo electrónico registrado y te enviaremos un enlace para restablecer tu contraseña.</p>
+                    <Label htmlFor="recoveryEmail" className="text-gray-800">Email</Label>
+                    <Input
+                      id="recoveryEmail"
+                      type="email"
+                      value={recoveryEmail}
+                      onChange={e => setRecoveryEmail(e.target.value)}
+                      required
+                      className="mt-1"
+                    />
+                  </div>
+                  {recoveryError && (
+                    <div className="text-red-600 text-sm text-center">{recoveryError}</div>
+                  )}
+                  <DialogFooter className="flex flex-col gap-2 mt-2">
+                    <Button type="submit" className="bg-green-600 hover:bg-green-700 w-full">Enviar enlace</Button>
+                    <Button type="button" variant="outline" className="w-full" onClick={() => setShowRecovery(false)}>Cancelar</Button>
+                  </DialogFooter>
+                </form>
+              )}
+            </div>
           </DialogContent>
         </Dialog>
               </div>
