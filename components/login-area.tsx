@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { supabase } from "@/lib/supabaseClient"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import Navigation from "@/components/navigation"
@@ -11,26 +12,12 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Terminal } from "lucide-react"
 import Image from "next/image"
 
-const mockUsers = [
-  {
-    email: "expositor@email.com",
-    password: "123456",
-    tipoParticipacion: "expositor",
-    nombre: "Expositor Ejemplo"
-  },
-  {
-    email: "comprador@email.com",
-    password: "123456",
-    tipoParticipacion: "comprador",
-    nombre: "Comprador Ejemplo"
-  },
-  // Agrega más usuarios de ejemplo según los tipos
-]
 
 export default function LoginArea() {
   const [form, setForm] = useState({ email: "", password: "" })
   const [error, setError] = useState("")
   const [user, setUser] = useState<any>(null)
+  const [loading, setLoading] = useState(false)
 
   // Hooks para recuperación de contraseña
   const [showRecovery, setShowRecovery] = useState(false)
@@ -38,33 +25,58 @@ export default function LoginArea() {
   const [recoverySent, setRecoverySent] = useState(false)
   const [recoveryError, setRecoveryError] = useState("")
 
-  const handleRecovery = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleRecovery = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setRecoveryError("")
     if (!recoveryEmail || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(recoveryEmail)) {
       setRecoveryError("Por favor ingresa un email válido.")
       return
     }
-    // Simular envío de email
-    setTimeout(() => {
+    setLoading(true)
+    const { error } = await supabase.auth.resetPasswordForEmail(recoveryEmail)
+    setLoading(false)
+    if (error) {
+      setRecoveryError("No se pudo enviar el correo. Intenta de nuevo.")
+    } else {
       setRecoverySent(true)
-    }, 1000)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.id]: e.target.value })
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError("")
-    const found = mockUsers.find(
-      (u) => u.email === form.email && u.password === form.password
-    )
-    if (found) {
-      setUser(found)
-    } else {
-      setError("Credenciales incorrectas")
+    setLoading(true)
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: form.email,
+      password: form.password,
+    })
+    setLoading(false)
+    if (error) {
+      setError("Credenciales incorrectas o usuario no verificado.")
+    } else if (data.session) {
+      // Buscar tipoParticipacion en la tabla registros
+      const { data: registro, error: regError } = await supabase
+        .from("registros")
+        .select("tipoParticipacion, nombre")
+        .eq("email", form.email)
+        .single()
+      if (registro) {
+        setUser({
+          email: form.email,
+          tipoParticipacion: registro.tipoParticipacion,
+          nombre: registro.nombre || form.email,
+        })
+      } else {
+        setUser({
+          email: form.email,
+          tipoParticipacion: "usuario",
+          nombre: form.email,
+        })
+      }
     }
   }
 
@@ -93,7 +105,10 @@ export default function LoginArea() {
           <h2 className="text-2xl font-bold mb-2 text-green-700">Hola, {user.nombre}</h2>
           <p className="mb-2 text-gray-700">Has iniciado sesión como <span className="font-semibold">{user.tipoParticipacion}</span>.</p>
           <p className="mb-6 text-green-700 font-semibold">{tipoMsg}</p>
-          <Button className="bg-green-600 hover:bg-green-700 w-32" onClick={() => setUser(null)}>
+          <Button className="bg-green-600 hover:bg-green-700 w-32" onClick={async () => {
+            await supabase.auth.signOut();
+            setUser(null);
+          }}>
             Cerrar sesión
           </Button>
         </div>
@@ -143,8 +158,8 @@ export default function LoginArea() {
                 <Label htmlFor="password">Contraseña</Label>
                 <Input id="password" type="password" value={form.password} onChange={handleChange} required />
               </div>
-              <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
-                Ingresar
+              <Button type="submit" className="w-full bg-green-600 hover:bg-green-700" disabled={loading}>
+                {loading ? "Ingresando..." : "Ingresar"}
               </Button>
               <div className="flex flex-col sm:flex-row justify-between items-center gap-2 mt-2">
                 <a href="/registro" className="text-orange-700 hover:underline font-medium text-sm">Registrarse</a>
@@ -195,7 +210,9 @@ export default function LoginArea() {
                     <div className="text-red-600 text-sm text-center">{recoveryError}</div>
                   )}
                   <DialogFooter className="flex flex-col gap-2 mt-2">
-                    <Button type="submit" className="bg-green-600 hover:bg-green-700 w-full">Enviar enlace</Button>
+                    <Button type="submit" className="bg-green-600 hover:bg-green-700 w-full" disabled={loading}>
+                      {loading ? "Enviando..." : "Enviar enlace"}
+                    </Button>
                     <Button type="button" variant="outline" className="w-full" onClick={() => setShowRecovery(false)}>Cancelar</Button>
                   </DialogFooter>
                 </form>

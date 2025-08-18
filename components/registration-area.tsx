@@ -12,10 +12,13 @@ import { Progress } from "@/components/ui/progress"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Terminal } from "lucide-react"
 
+import { supabase } from "@/lib/supabaseClient"
+
 type FormData = {
   nombre: string
   apellido: string
   email: string
+  password: string
   tipoParticipacion: string
   empresa: string
   pais: string
@@ -29,6 +32,7 @@ export default function RegistrationArea() {
     nombre: "",
     apellido: "",
     email: "",
+    password: "",
     tipoParticipacion: "",
     empresa: "",
     pais: "",
@@ -99,6 +103,27 @@ export default function RegistrationArea() {
     e.preventDefault()
     if (validateStep()) {
       try {
+        // 1. Crear usuario en Supabase Auth
+        const { error: authError } = await supabase.auth.signUp({
+          email: formData.email,
+          password: formData.password,
+          options: {
+            data: {
+              nombre: formData.nombre,
+              apellido: formData.apellido,
+              tipoParticipacion: formData.tipoParticipacion,
+              empresa: formData.empresa,
+              pais: formData.pais,
+              intereses: formData.intereses,
+              comentarios: formData.comentarios,
+            }
+          }
+        })
+        if (authError) {
+          setSubmissionStatus("error")
+          return
+        }
+        // 2. Guardar datos en la tabla registros
         const res = await fetch("/api/registro", {
           method: "POST",
           headers: {
@@ -113,6 +138,7 @@ export default function RegistrationArea() {
             nombre: "",
             apellido: "",
             email: "",
+            password: "",
             tipoParticipacion: "",
             empresa: "",
             pais: "",
@@ -154,6 +180,11 @@ export default function RegistrationArea() {
               <Label htmlFor="email">Email</Label>
               <Input id="email" type="email" value={formData.email} onChange={handleChange} required />
               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+            </div>
+            <div>
+              <Label htmlFor="password">Contraseña</Label>
+              <Input id="password" type="password" value={formData.password} onChange={handleChange} required minLength={6} />
+              <p className="text-gray-500 text-xs mt-1">Mínimo 6 caracteres</p>
             </div>
             <Button type="button" onClick={nextStep} className="w-full bg-green-600 hover:bg-green-700">
               Siguiente
@@ -362,7 +393,8 @@ export default function RegistrationArea() {
           <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full flex flex-col items-center text-center border border-green-500">
             <Terminal className="h-8 w-8 text-green-600 mb-2" />
             <h2 className="text-2xl font-bold mb-2 text-green-700">¡Registro Exitoso!</h2>
-            <p className="mb-6 text-gray-700">Gracias por registrarte en la Rueda de Negocios de Cacaos de Venezuela. Te hemos enviado un email de confirmación.</p>
+            <p className="mb-4 text-gray-700">Gracias por registrarte en la Rueda de Negocios de Cacaos de Venezuela.</p>
+            <p className="mb-6 text-green-700 font-semibold">Te hemos enviado un email de confirmación. <br />Por favor revisa tu bandeja de entrada y haz clic en el enlace para activar tu cuenta antes de iniciar sesión.</p>
             <Button className="bg-green-600 hover:bg-green-700 w-32" onClick={() => setSubmissionStatus(null)}>
               Aceptar
             </Button>
