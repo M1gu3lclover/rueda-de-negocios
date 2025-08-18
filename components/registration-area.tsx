@@ -98,24 +98,31 @@ export default function RegistrationArea() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (validateStep()) {
-      // Simulate API call
-      console.log("Form Data:", formData)
       try {
-        // Replace with actual API call
-        await new Promise((resolve) => setTimeout(resolve, 1500))
-        setSubmissionStatus("success")
-        // Optionally reset form
-        setFormData({
-          nombre: "",
-          apellido: "",
-          email: "",
-          tipoParticipacion: "",
-          empresa: "",
-          pais: "",
-          intereses: [],
-          comentarios: "",
+        const res = await fetch("/api/registro", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         })
-        setStep(1) // Reset to first step
+        const result = await res.json()
+        if (result.success) {
+          setSubmissionStatus("success")
+          setFormData({
+            nombre: "",
+            apellido: "",
+            email: "",
+            tipoParticipacion: "",
+            empresa: "",
+            pais: "",
+            intereses: [],
+            comentarios: "",
+          })
+          setStep(1)
+        } else {
+          setSubmissionStatus("error")
+        }
       } catch (error) {
         setSubmissionStatus("error")
       }
