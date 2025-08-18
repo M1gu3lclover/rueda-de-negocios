@@ -104,7 +104,7 @@ export default function LoginArea() {
   return (
     <>
       <Navigation />
-      <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-white py-12 px-2">
+      <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-white py-6 px-2">
         <div className="bg-white rounded-xl shadow-2xl flex flex-col md:flex-row items-center w-full max-w-3xl overflow-hidden border border-orange-100">
           {/* Imagen decorativa al lado */}
           <div className="hidden md:block w-1/2 h-full relative min-h-[400px]">
@@ -121,7 +121,7 @@ export default function LoginArea() {
             {/* Sin overlay para que la imagen se vea completamente */}
           </div>
           {/* Logo y formulario */}
-          <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8">
+          <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-4 sm:p-8">
             <Image
               src="/MDN.png"
               alt="Logo"
@@ -134,7 +134,7 @@ export default function LoginArea() {
               Rueda <span className="text-gray-900">de</span> Negocios
             </h1>
             <h2 className="text-xl font-bold text-center mb-8 text-gray-700">Iniciar Sesión</h2>
-            <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-sm">
+            <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-sm">
               <div>
                 <Label htmlFor="email">Email</Label>
                 <Input id="email" type="email" value={form.email} onChange={handleChange} required />
@@ -146,7 +146,7 @@ export default function LoginArea() {
               <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
                 Ingresar
               </Button>
-              <div className="flex flex-col sm:flex-row justify-between items-center gap-2 mt-4">
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-2 mt-2">
                 <a href="/registro" className="text-orange-700 hover:underline font-medium text-sm">Registrarse</a>
                 <button
                   type="button"
@@ -162,8 +162,8 @@ export default function LoginArea() {
                 </button>
         {/* Modal de recuperación de contraseña */}
         <Dialog open={showRecovery} onOpenChange={setShowRecovery}>
-          <DialogContent className="max-w-md p-0 rounded-xl overflow-hidden">
-            <div className="flex flex-col items-center justify-center py-8 px-6">
+          <DialogContent className="max-w-md w-full p-0 rounded-xl overflow-hidden">
+            <div className="flex flex-col items-center justify-center py-6 px-4 sm:py-8 sm:px-6 w-full">
               <Image src="/MDN.png" alt="Logo" width={60} height={60} className="mb-2" priority />
               <DialogHeader className="w-full text-center mb-2">
                 <DialogTitle className="text-2xl font-bold text-orange-700">Recuperar contraseña</DialogTitle>
