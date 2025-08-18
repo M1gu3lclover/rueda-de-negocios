@@ -6,6 +6,7 @@ import { ChevronDown, Users, Building, MapPin, Award, Camera, Handshake, Menu } 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
+import { MobileMenu } from "@/components/ui/mobile-menu"
 
 const participacionItems = [
 	{ href: "/asistir", label: "Asistir", icon: Users },
@@ -114,10 +115,9 @@ export default function Navigation() {
 		  </Link>
 				</nav>
 
-				{/* Ícono hamburguesa para mobile (sin funcionalidad aún) */}
-				<button className="md:hidden p-2 text-gray-700 hover:text-orange-600" aria-label="Abrir menú">
-					<Menu className="w-6 h-6" />
-				</button>
+			{/* Ícono hamburguesa para mobile con funcionalidad */}
+			{/* Menú móvil funcional */}
+			<MobileMenu />
 			</div>
 		</header>
 	)

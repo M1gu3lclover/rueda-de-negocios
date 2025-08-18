@@ -81,7 +81,7 @@ export default function ExpositoresSection() {
   })
 
   return (
-    <div className="container mx-auto px-4 py-12">
+  <div className="container mx-auto px-4 py-8 sm:py-12">
       <h1 className="text-4xl font-bold text-center mb-8">Lista de Expositores de Cacaos de Venezuela</h1>
       <p className="text-lg text-center text-gray-600 mb-12">
         Descubre las empresas líderes y los innovadores de la industria cacaotera venezolana que participarán en nuestra

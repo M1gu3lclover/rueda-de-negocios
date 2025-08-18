@@ -125,7 +125,7 @@ export default function RegistrationArea() {
   const progressValue = (step / 3) * 100
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-2xl">
+  <div className="container mx-auto px-4 py-8 sm:py-12 max-w-md sm:max-w-2xl">
       <h1 className="text-3xl font-bold text-center mb-8">Registro para la Rueda de Negocios</h1>
       <Progress value={progressValue} className="w-full mb-8" />
 

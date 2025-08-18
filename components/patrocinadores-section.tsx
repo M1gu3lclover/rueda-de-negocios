@@ -141,10 +141,10 @@ const beneficiosPatrocinio = [
 
 export default function PatrocinadoresSection() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50">
+  <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-yellow-600 to-orange-700 text-white py-16">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Patrocinadores y Aliados Estratégicos</h1>
             <p className="text-xl mb-8 text-yellow-100">
@@ -167,7 +167,7 @@ export default function PatrocinadoresSection() {
 
       {/* Patrocinadores Actuales */}
       <div className="py-16">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Nuestros Patrocinadores</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">Empresas líderes que confían en Rueda de Negocios</p>
@@ -197,7 +197,7 @@ export default function PatrocinadoresSection() {
 
       {/* Beneficios del Patrocinio */}
       <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">¿Por Qué Ser Patrocinador?</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">Beneficios estratégicos para tu empresa</p>
@@ -219,7 +219,7 @@ export default function PatrocinadoresSection() {
 
       {/* Niveles de Patrocinio */}
       <div className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Niveles de Patrocinio</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -299,7 +299,7 @@ export default function PatrocinadoresSection() {
 
       {/* CTA Final */}
       <div className="py-16 bg-gradient-to-r from-yellow-600 to-orange-700">
-        <div className="container mx-auto px-4 text-center">
+  <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">¿Listo para Ser Nuestro Próximo Patrocinador?</h2>
           <p className="text-xl text-yellow-100 mb-8 max-w-2xl mx-auto">
             Únete a las empresas líderes que apoyan la Rueda de Negocios del cacao venezolano

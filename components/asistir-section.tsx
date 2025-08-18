@@ -81,10 +81,10 @@ const beneficiosAsistir = [
 
 export default function AsistirSection() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
+  <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-50">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-green-600 to-emerald-700 text-white py-16">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Participa en Rueda de Negocios 2026</h1>
             <p className="text-xl mb-8 text-green-100">
@@ -121,7 +121,7 @@ export default function AsistirSection() {
 
       {/* Beneficios de Participar */}
       <div className="py-16">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">¿Por Qué Participar en Nuestra Rueda de Negocios?</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -145,7 +145,7 @@ export default function AsistirSection() {
 
       {/* Paquetes de Participación */}
       <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Paquetes de Participación</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -197,7 +197,7 @@ export default function AsistirSection() {
 
       {/* Estadísticas de Éxito */}
       <div className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Resultados Comprobados</h2>
             <p className="text-lg text-gray-600">Estadísticas de ediciones anteriores</p>
@@ -226,7 +226,7 @@ export default function AsistirSection() {
 
       {/* CTA Final */}
       <div className="py-16 bg-gradient-to-r from-green-600 to-emerald-700">
-        <div className="container mx-auto px-4 text-center">
+  <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">¿Listo para Hacer Negocios?</h2>
           <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
             No te pierdas la oportunidad de conectar con compradores internacionales y generar negocios reales

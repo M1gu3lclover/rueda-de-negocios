@@ -11,10 +11,10 @@ import SuiteComparator from "./suite-comparator"
 
 export default function HotelViajeSection() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+  <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-yellow-500 text-yellow-900">
               <Hotel className="w-4 h-4 mr-1" />
@@ -48,7 +48,7 @@ export default function HotelViajeSection() {
 
       {/* Hotel Oficial */}
       <div className="py-16">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Hotel Serrano: Socio Oficial</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -120,7 +120,7 @@ export default function HotelViajeSection() {
 
       {/* Opciones de Viaje */}
       <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Opciones de Viaje a Mérida</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -181,7 +181,7 @@ export default function HotelViajeSection() {
 
       {/* CTA Final */}
       <div className="py-16 bg-gradient-to-r from-blue-600 to-indigo-700">
-        <div className="container mx-auto px-4 text-center">
+  <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Planifica tu Viaje sin Preocupaciones</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Asegura tu alojamiento y transporte para la Rueda de Negocios de Cacaos de Venezuela 2026

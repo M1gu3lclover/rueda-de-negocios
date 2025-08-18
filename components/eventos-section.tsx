@@ -161,10 +161,10 @@ export default function EventosSection() {
       : eventosNetworking.filter((evento) => evento.categoria === categoriaSeleccionada)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+  <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-yellow-500 text-yellow-900">
               <Network className="w-4 h-4 mr-1" />
@@ -198,7 +198,7 @@ export default function EventosSection() {
 
       {/* Filtros */}
       <div className="py-8 bg-white border-b">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center space-x-2">
               <Filter className="w-5 h-5 text-gray-600" />
@@ -222,7 +222,7 @@ export default function EventosSection() {
 
       {/* Lista de Eventos de Networking */}
       <div className="py-16">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {eventosFiltrados.map((evento) => (
               <Card
@@ -283,7 +283,7 @@ export default function EventosSection() {
 
       {/* Agenda de Networking */}
       <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Agenda de Eventos de Networking</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -330,7 +330,7 @@ export default function EventosSection() {
 
       {/* CTA Final */}
       <div className="py-16 bg-gradient-to-r from-blue-600 to-indigo-700">
-        <div className="container mx-auto px-4 text-center">
+  <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Maximiza tus Oportunidades de Networking</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             Participa en los eventos de networking más efectivos de la Rueda de Negocios

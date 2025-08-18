@@ -78,10 +78,10 @@ const beneficiosExhibir = [
 
 export default function ExhibirSection() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
+  <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-orange-600 to-red-700 text-white py-16">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Exhibe y Conecta con Compradores Globales</h1>
             <p className="text-xl mb-8 text-orange-100">
@@ -105,7 +105,7 @@ export default function ExhibirSection() {
 
       {/* Beneficios de Exhibir */}
       <div className="py-16">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">¿Por Qué Exhibir en Nuestra Rueda de Negocios?</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -129,7 +129,7 @@ export default function ExhibirSection() {
 
       {/* Paquetes de Exhibición */}
       <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Paquetes de Exhibición + Networking</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -181,7 +181,7 @@ export default function ExhibirSection() {
 
       {/* Estadísticas */}
       <div className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Resultados de Expositores</h2>
           </div>
@@ -209,7 +209,7 @@ export default function ExhibirSection() {
 
       {/* CTA Final */}
       <div className="py-16 bg-gradient-to-r from-orange-600 to-red-700">
-        <div className="container mx-auto px-4 text-center">
+  <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">¿Listo para Exhibir y Hacer Negocios?</h2>
           <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
             Combina la exhibición de tu cacao con networking B2B dirigido para maximizar tu ROI

@@ -162,10 +162,10 @@ export default function ConferenciaSection() {
   const [diaSeleccionado, setDiaSeleccionado] = useState("dia1")
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+  <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-yellow-500 text-yellow-900">
               <Star className="w-4 h-4 mr-1" />
@@ -199,7 +199,7 @@ export default function ConferenciaSection() {
 
       {/* Speakers Destacados */}
       <div className="py-16">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Speakers Internacionales</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -239,7 +239,7 @@ export default function ConferenciaSection() {
 
       {/* Programa de Conferencias */}
       <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Programa de Conferencias</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">Agenda completa del Primer Congreso Internacional</p>
@@ -283,7 +283,7 @@ export default function ConferenciaSection() {
 
       {/* Paquetes de Conferencia */}
       <div className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
+  <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Paquetes de Conferencia</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -335,7 +335,7 @@ export default function ConferenciaSection() {
 
       {/* CTA Final */}
       <div className="py-16 bg-gradient-to-r from-blue-600 to-indigo-700">
-        <div className="container mx-auto px-4 text-center">
+  <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Sé Parte de la Historia</h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
             No te pierdas el Primer Congreso Internacional del Cacao Venezolano
