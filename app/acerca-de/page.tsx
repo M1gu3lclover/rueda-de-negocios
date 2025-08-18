@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 
+export default function AcercaDePage() {
   return (
     <>
       <Navigation />
@@ -40,7 +41,7 @@ import Footer from "@/components/footer"
         </Card>
         <div className="text-center">
           <Image src="/MDN.png" alt="Logo Rueda de Negocios" width={120} height={120} className="mx-auto mb-4" />
-          <p className="text-gray-500">Mérida, Venezuela &mdash; Edición 2026</p>
+          <p className="text-gray-500">Mérida, Venezuela &mdash; Edición 2025</p>
         </div>
       </div>
       <Footer />
