@@ -234,6 +234,10 @@ export default function RegistrationArea() {
                   <Label htmlFor="exportador">Exportador</Label>
                 </div>
                 <div className="flex items-center space-x-2 w-full">
+                  <RadioGroupItem value="importador" id="importador" />
+                  <Label htmlFor="maquinaria">Importador</Label>
+                </div>
+                <div className="flex items-center space-x-2 w-full">
                   <RadioGroupItem value="productor" id="productor" />
                   <Label htmlFor="productor">Productor</Label>
                 </div>
@@ -264,6 +268,18 @@ export default function RegistrationArea() {
                 <div className="flex items-center space-x-2 w-full">
                   <RadioGroupItem value="maquinaria" id="maquinaria" />
                   <Label htmlFor="maquinaria">Maquinaria</Label>
+                </div>
+                <div className="flex items-center space-x-2 w-full">
+                  <RadioGroupItem value="implementos" id="implementos" />
+                  <Label htmlFor="maquinaria">Implementos epecializados</Label>
+                </div>
+                <div className="flex items-center space-x-2 w-full">
+                  <RadioGroupItem value="indumentaria" id="indumentaria" />
+                  <Label htmlFor="maquinaria">indumentaria laboral</Label>
+                </div>
+                <div className="flex items-center space-x-2 w-full">
+                  <RadioGroupItem value="maestrochocolateria" id="maestrochocolateria" />
+                  <Label htmlFor="maquinaria">Maestro de la chocolateria </Label>
                 </div>
               </RadioGroup>
               {errors.tipoParticipacion && <p className="text-red-500 text-sm mt-1">{errors.tipoParticipacion}</p>}
