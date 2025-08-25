@@ -281,6 +281,10 @@ export default function RegistrationArea() {
                   <RadioGroupItem value="maestrochocolateria" id="maestrochocolateria" />
                   <Label htmlFor="maquinaria">Maestro de la chocolateria </Label>
                 </div>
+                <div className="flex items-center space-x-2 w-full">
+                  <RadioGroupItem value="industria" id="industria" />
+                  <Label htmlFor="maquinaria">Industria de la chocolateria</Label>
+                </div>
               </RadioGroup>
               {errors.tipoParticipacion && <p className="text-red-500 text-sm mt-1">{errors.tipoParticipacion}</p>}
             </div>
@@ -297,6 +301,8 @@ export default function RegistrationArea() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="venezuela">Venezuela</SelectItem>
+                  <SelectItem value="rusia">Rusia</SelectItem>
+                  <SelectItem value="china">China</SelectItem>
                   <SelectItem value="colombia">Colombia</SelectItem>
                   <SelectItem value="ecuador">Ecuador</SelectItem>
                   <SelectItem value="peru">Perú</SelectItem>
