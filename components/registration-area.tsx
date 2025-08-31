@@ -102,18 +102,9 @@ export default function RegistrationArea() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (validateStep()) {
-      // Validación extra antes de enviar a Supabase
-      if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
-        setErrors((prev) => ({ ...prev, email: "Email inválido." }))
-        return
-      }
-      if (!formData.password || formData.password.length < 6) {
-        setErrors((prev) => ({ ...prev, password: "La contraseña debe tener al menos 6 caracteres." }))
-        return
-      }
       try {
         // 1. Crear usuario en Supabase Auth
-        const { data: signUpData, error: authError } = await supabase.auth.signUp({
+        const { error: authError } = await supabase.auth.signUp({
           email: formData.email,
           password: formData.password,
           options: {
@@ -129,12 +120,7 @@ export default function RegistrationArea() {
           }
         })
         if (authError) {
-          // Mensaje específico si el email ya existe
-          if (authError.message && authError.message.includes("already registered")) {
-            setErrors((prev) => ({ ...prev, email: "Este email ya está registrado. Usa otro o inicia sesión." }))
-          } else {
-            setSubmissionStatus("error")
-          }
+          setSubmissionStatus("error")
           return
         }
         // 2. Guardar datos en la tabla registros
